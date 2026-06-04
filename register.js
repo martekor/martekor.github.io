@@ -12,13 +12,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     .then(function(res) { return res.json(); })
     .then(function(result) {
         if (result.status === 'pass') {
-            var msg = document.getElementById('msg');
-            if (!msg) {
-                msg = document.createElement('p');
-                msg.id = 'msg';
-                document.body.appendChild(msg);
-            }
-            msg.textContent = 'An account has been created';
+            document.getElementById('message').textContent = 'An account has been created';
         }
     });
 });

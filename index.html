@@ -4,33 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martekor - Register</title>
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
-    <form id="registerForm">
-        <input type="text" name="username" placeholder="Enter username" required>
-        <input type="password" name="password" placeholder="Enter password" required>
-        <button type="submit">Sign up</button>
-    </form>
-    <p id="msg"></p>
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var data = {
-                username: this.querySelector('[name="username"]').value,
-                password: this.querySelector('[name="password"]').value
-            };
-            fetch('https://svirityofficiel2.pythonanywhere.com/register', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(result) {
-                if (result.status === 'pass') {
-                    document.getElementById('msg').textContent = 'An account has been created';
-                }
-            });
-        });
-    </script>
+    <div class="container">
+        <form id="registerForm">
+            <input type="text" name="username" placeholder="Enter username" required>
+            <input type="password" name="password" placeholder="Enter password" required>
+            <button type="submit">Sign up</button>
+        </form>
+        <p id="message"></p>
+    </div>
+    <script src="register.js"></script>
 </body>
 </html>
