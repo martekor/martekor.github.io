@@ -1,10 +1,10 @@
-''https.getElementById('registerForm').addEventListener('submit', function(e) {
+document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var username = this.querySelector('[name="username"]').value;
     var password = this.querySelector('[name="password"]').value;
     if (!validate(username, password)) return;
     var data = { username: username, password: password };
-    fetch('https://svirityofficiel2.pythonanywhere.com/rregister', {
+    fetch('https://svirityofficiel2.pythonanywhere.com/register', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
