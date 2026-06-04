@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'AirbnbCereal';
+    src: url('AirbnbCereal_W_Bd.otf') format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'AirbnbCereal';
+    src: url('AirbnbCereal_W_Bd.otf') format('opentype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'AirbnbCereal';
+    src: url('AirbnbCereal_W_Bd.otf') format('opentype');
+    font-weight: normal;
+}
+
+* {
+    font-family: 'AirbnbCereal', -apple-system, BlinkMacSystemFont, sans-serif;
+}
