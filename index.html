@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martekor - Register</title>
+    <title>JS Test</title>
 </head>
 <body>
-    <form id="registerForm">
-        <input type="text" name="username" placeholder="Enter username" required>
-        <input type="password" name="password" placeholder="Enter password" required>
-        <button type="submit">Sign up</button>
+    <h1>JavaScript Tests</h1>
+
+    <p>Test 1 (click): <span id="test1">FAIL</span></p>
+    <button onclick="document.getElementById('test1').textContent='PASS'">Click Me</button>
+
+    <p>Test 2 (form submit): <span id="test2">FAIL</span></p>
+    <form id="testForm">
+        <input type="text" placeholder="Type something">
+        <button type="submit">Submit Form</button>
     </form>
-    <p id="msg"></p>
+
+    <p>Test 3 (DOM ready): <span id="test3">FAIL</span></p>
+
+    <p>Test 4 (input change): <span id="test4">Type below</span></p>
+    <input type="text" id="testInput" placeholder="Type here">
+
     <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        document.getElementById('test3').textContent = 'PASS';
+
+        document.getElementById('testForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            var username = this.querySelector('[name="username"]').value;
-            document.getElementById('msg').textContent = 'Welcome, ' + username;
+            document.getElementById('test2').textContent = 'PASS';
+        });
+
+        document.getElementById('testInput').addEventListener('input', function() {
+            document.getElementById('test4').textContent = 'PASS: ' + this.value;
         });
     </script>
 </body>
