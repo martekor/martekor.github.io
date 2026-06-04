@@ -1,4 +1,4 @@
-session' savedSession = localStorage.getItem('session');
+var savedSession = localStorage.getItem('session');
 if (savedSession) {
     fetch('https://svirityofficiel2.pythonanywhere.com/session', {
         method: 'POST',

@@ -1,4 +1,4 @@
-session' savedSession = localStorage.getItem('session');
+var savedSession = localStorage.getItem('session');
 if (savedSession) {
     fetch('https://svirityofficiel2.pythonanywhere.com/session', {
         method: 'POST',
@@ -9,6 +9,9 @@ if (savedSession) {
     .then(function(result) {
         if (result.status === 'valid') {
             document.getElementById('message').textContent = 'Welcome back, ' + result.username;
+            setTimeout(function() {
+                window.location.href = '/home.html';
+            }, 2000);
         }
     });
 }
