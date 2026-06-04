@@ -1,6 +1,12 @@
 var savedSession = localStorage.getItem('session');
 var currentUsername = '';
 
+if (!savedSession) {
+    document.getElementById('profile').textContent = 'No session found';
+} else {
+    document.getElementById('profile').textContent = 'Session: ' + savedSession.substring(0, 10) + '...';
+}
+
 setTimeout(function() {
     if (savedSession) {
         var xhr = new XMLHttpRequest();
@@ -8,17 +14,21 @@ setTimeout(function() {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function() {
             var result = JSON.parse(xhr.responseText);
+            document.getElementById('profile').textContent = 'Session check: ' + result.status;
             if (result.status === 'valid') {
                 currentUsername = result.username;
                 document.getElementById('profile').textContent = 'Welcome, ' + currentUsername;
                 loadUsers(currentUsername);
             }
         };
+        xhr.onerror = function() {
+            document.getElementById('profile').textContent = 'Session request failed';
+        };
         xhr.send(JSON.stringify({session: savedSession}));
     } else {
         window.location.href = '/index.html';
     }
-}, 2000);
+}, 1000);
 
 function loadUsers(exclude) {
     var xhr = new XMLHttpRequest();
@@ -26,6 +36,7 @@ function loadUsers(exclude) {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', savedSession);
     xhr.onload = function() {
+        document.getElementById('profile').textContent = 'Home status: ' + xhr.status;
         if (xhr.status === 200) {
             var users = JSON.parse(xhr.responseText);
             var list = document.getElementById('userList');
@@ -39,6 +50,9 @@ function loadUsers(exclude) {
                 }
             }
         }
+    };
+    xhr.onerror = function() {
+        document.getElementById('profile').textContent = 'Home request failed';
     };
     xhr.send();
 }
