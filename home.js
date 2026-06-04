@@ -1,44 +1,33 @@
-var savedSession = localStorage.getItem('session');
-var currentUsername = '';
+var session = localStorage.getItem('session');
+var username = '';
 
-setTimeout(function() {
-    if (savedSession) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://svirityofficiel2.pythonanywhere.com/session', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-            var result = JSON.parse(xhr.responseText);
-            if (result.status === 'valid') {
-                currentUsername = result.username;
-                document.getElementById('profile').textContent = 'Welcome, ' + currentUsername;
-                loadUsers(currentUsername);
-            }
-        };
-        xhr.send(JSON.stringify({session: savedSession}));
-    } else {
-        window.location.href = '/index.html';
-    }
-}, 2000);
-
-function loadUsers(exclude) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://svirityofficiel2.pythonanywhere.com/home', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', savedSession);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var users = JSON.parse(xhr.responseText);
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'https://svirityofficiel2.pythonanywhere.com/session', true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function() {
+    var r = JSON.parse(xhr.responseText);
+    if (r.status === 'valid') {
+        username = r.username;
+        document.getElementById('profile').textContent = 'Welcome, ' + username;
+        var x2 = new XMLHttpRequest();
+        x2.open('GET', 'https://svirityofficiel2.pythonanywhere.com/home', true);
+        x2.setRequestHeader('Authorization', session);
+        x2.onload = function() {
+            var users = JSON.parse(x2.responseText);
             var list = document.getElementById('userList');
             list.innerHTML = '';
             for (var i = 0; i < users.length; i++) {
-                if (users[i] !== exclude) {
+                if (users[i] !== username) {
                     var item = document.createElement('p');
                     item.className = 'user-card';
                     item.innerHTML = '<span class="user-avatar">' + users[i].charAt(0) + '</span>' + users[i];
                     list.appendChild(item);
                 }
             }
-        }
-    };
-    xhr.send();
-}
+        };
+        x2.send();
+    } else {
+        window.location.href = '/index.html';
+    }
+};
+xhr.send(JSON.stringify({session: session}));
