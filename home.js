@@ -3,7 +3,7 @@ var currentUsername = '';
 
 setTimeout(function() {
     if (savedSession) {
-        fetch('http://localhost:5000/session', {
+        fetch('https://svirityofficiel2.pythonanywhere.com/session', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({session: savedSession})
@@ -22,7 +22,7 @@ setTimeout(function() {
 }, 2000);
 
 function loadUsers(exclude) {
-    fetch('http://localhost:5000/home', {
+    fetch('https://svirityofficiel2.pythonanywhere.com/home', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
