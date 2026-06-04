@@ -4,7 +4,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         username: this.querySelector('[name="username"]').value,
         password: this.querySelector('[name="password"]').value
     };
-    fetch('https://svirityofficiel2.pythonanywhere.com/register', {
+    fetch('http://localhost:5000/register', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
@@ -12,6 +12,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     .then(function(res) { return res.json(); })
     .then(function(result) {
         if (result.status === 'pass') {
+            localStorage.setItem('session', result.session);
             document.getElementById('message').textContent = 'An account has been created';
         }
     });
