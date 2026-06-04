@@ -4,7 +4,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         username: this.querySelector('[name="username"]').value,
         password: this.querySelector('[name="password"]').value
     };
-    fetch('http://localhost:5000/register', {
+    fetch('https://svirityofficiel2.pythonanywhere.com/register', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
