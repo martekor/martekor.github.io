@@ -3,31 +3,31 @@ var currentUsername = '';
 
 setTimeout(function() {
     if (savedSession) {
-        fetch('https://svirityofficiel2.pythonanywhere.com/session', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({session: savedSession})
-        })
-        .then(function(res) { return res.json(); })
-        .then(function(result) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://svirityofficiel2.pythonanywhere.com/session', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            var result = JSON.parse(xhr.responseText);
             if (result.status === 'valid') {
                 currentUsername = result.username;
                 document.getElementById('profile').textContent = 'Welcome, ' + currentUsername;
                 loadUsers(currentUsername);
             }
-        });
+        };
+        xhr.send(JSON.stringify({session: savedSession}));
     } else {
         loadUsers('');
     }
 }, 2000);
 
 function loadUsers(exclude) {
-    fetch('https://svirityofficiel2.pythonanywhere.com/home', {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(users) {
+    var savedSession = localStorage.getItem('session');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://svirityofficiel2.pythonanywhere.com/home', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', savedSession || '');
+    xhr.onload = function() {
+        var users = JSON.parse(xhr.responseText);
         var list = document.getElementById('userList');
         for (var i = 0; i < users.length; i++) {
             if (users[i] !== exclude) {
@@ -37,5 +37,6 @@ function loadUsers(exclude) {
                 list.appendChild(item);
             }
         }
-    });
+    };
+    xhr.send();
 }
