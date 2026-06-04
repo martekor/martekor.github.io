@@ -1,6 +1,6 @@
-var savedSession = localStorage.getItem('session');
+session' savedSession = localStorage.getItem('session');
 if (savedSession) {
-    fetch('http://localhost:5000/session', {
+    fetch('https://svirityofficiel2.pythonanywhere.com/session', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({session: savedSession})
