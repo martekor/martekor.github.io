@@ -16,25 +16,27 @@ setTimeout(function() {
         };
         xhr.send(JSON.stringify({session: savedSession}));
     } else {
-        loadUsers('');
+        window.location.href = '/index.html';
     }
 }, 2000);
 
 function loadUsers(exclude) {
-    var savedSession = localStorage.getItem('session');
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://svirityofficiel2.pythonanywhere.com/home', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', savedSession || '');
+    xhr.setRequestHeader('Authorization', savedSession);
     xhr.onload = function() {
-        var users = JSON.parse(xhr.responseText);
-        var list = document.getElementById('userList');
-        for (var i = 0; i < users.length; i++) {
-            if (users[i] !== exclude) {
-                var item = document.createElement('p');
-                item.className = 'user-card';
-                item.innerHTML = '<span class="user-avatar">' + users[i].charAt(0) + '</span>' + users[i];
-                list.appendChild(item);
+        if (xhr.status === 200) {
+            var users = JSON.parse(xhr.responseText);
+            var list = document.getElementById('userList');
+            list.innerHTML = '';
+            for (var i = 0; i < users.length; i++) {
+                if (users[i] !== exclude) {
+                    var item = document.createElement('p');
+                    item.className = 'user-card';
+                    item.innerHTML = '<span class="user-avatar">' + users[i].charAt(0) + '</span>' + users[i];
+                    list.appendChild(item);
+                }
             }
         }
     };
