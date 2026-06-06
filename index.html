@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" translate="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
     <meta name="google-site-verification" content="evXEaLaJOTiN-eVhg2lxnXjc0u5hOibDKz2S3UUHPUM" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martekor - Register</title>
-    <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/eye.css">
 </head>
 <body>
     <div class="container">
-        <img src="aslum.svg" alt="Martekor" class="logo">
+        <img src="assets/martekor.svg" alt="Martekor" class="logo">
         <h1>martekor</h1>
         <form>
             <input type="text" name="username" placeholder="Enter username" required>
-            <input type="password" name="password" placeholder="Enter password" required>
+            <div class="password-wrap">
+                <input type="password" name="password" id="password" placeholder="Enter password" required>
+                <span class="toggle-eye">
+                    <img src="assets/eye.svg" id="eyeIcon" alt="Show">
+                </span>
+            </div>
             <button type="submit">Sign up</button>
             <p id="message"></p>
         </form>
-        <p class="login-link">Already have an account? <a href="/login.html">Log in</a></p>
+        <p class="login-link">Already have an account? <a href="login.html">Log in</a></p>
+        <p class="terms">By signing up, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
-    <script src="session.js"></script>
-    <script src="register.js"></script>
+    <p class="copyright">&copy; 2026 Martekor. All rights reserved.</p>
+    <script src="js/eye.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/register.js"></script>
 </body>
 </html>
