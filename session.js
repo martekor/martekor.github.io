@@ -1,9 +1,13 @@
-var savedSession = localStorage.getItem('session');
-if (savedSession) {
-    fetch('https://svirityofficiel2.pythonanywhere.com/session', {
+document.getElementById('message').textContent = 'Checking session...';
+document.querySelector('button').disabled = true;
+
+var aslum = JSON.parse(localStorage.getItem('aslum') || '{}');
+
+if (aslum.session) {
+    fetch('https://aslum.pythonanywhere.com/session', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({session: savedSession})
+        body: JSON.stringify({session: aslum.session})
     })
     .then(function(res) { return res.json(); })
     .then(function(result) {
@@ -12,6 +16,17 @@ if (savedSession) {
             setTimeout(function() {
                 window.location.href = '/home.html';
             }, 2000);
+        } else {
+            localStorage.removeItem('aslum');
+            document.getElementById('message').textContent = '';
+            document.querySelector('button').disabled = false;
         }
+    })
+    .catch(function() {
+        document.getElementById('message').textContent = '';
+        document.querySelector('button').disabled = false;
     });
+} else {
+    document.getElementById('message').textContent = '';
+    document.querySelector('button').disabled = false;
 }
