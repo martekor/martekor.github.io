@@ -1,0 +1,46 @@
+.password-wrap {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.password-wrap input {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 0;
+}
+
+.password-wrap input:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    user-select: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-eye:focus {
+    outline: none;
+}
+
+.toggle-eye img {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    display: block;
+}
