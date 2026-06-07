@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martekor - Verify Email</title>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+    <div class="container">
+        <img src="assets/martekor.svg" alt="Martekor" class="logo">
+        <h1>martekor</h1>
+        <form>
+            <p id="message">Verifying your email...</p>
+        </form>
+    </div>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+        if (token) {
+            fetch('https://aslum.pythonanywhere.com/verify', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({token: token})
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(result) {
+                if (result.status === 'verified') {
+                    localStorage.setItem('aslum', JSON.stringify({session: result.session}));
+                    document.getElementById('message').textContent = 'Email verified! Welcome ' + result.username + '.';
+                    setTimeout(function() {
+                        window.location.href = 'home.html';
+                    }, 2000);
+                } else {
+                    document.getElementById('message').textContent = 'Invalid or expired verification link.';
+                }
+            });
+        } else {
+            document.getElementById('message').textContent = 'No verification token found.';
+        }
+    </script>
+</body>
+</html>
