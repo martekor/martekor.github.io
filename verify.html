@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martekor - Verify Email</title>
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/verify.css">
 </head>
 <body>
     <div class="container">
@@ -14,31 +15,13 @@
         <form>
             <p id="message">Verifying your email...</p>
         </form>
+        <p class="terms">
+            <a href="terms.html">Terms</a>
+            <span>&middot;</span>
+            <a href="privacy.html">Privacy</a>
+        </p>
     </div>
-    <script>
-        var params = new URLSearchParams(window.location.search);
-        var token = params.get('token');
-        if (token) {
-            fetch('https://aslum.pythonanywhere.com/verify', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({token: token})
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(result) {
-                if (result.status === 'verified') {
-                    localStorage.setItem('aslum', JSON.stringify({session: result.session}));
-                    document.getElementById('message').textContent = 'Email verified! Welcome ' + result.username + '.';
-                    setTimeout(function() {
-                        window.location.href = 'home.html';
-                    }, 2000);
-                } else {
-                    document.getElementById('message').textContent = 'Invalid or expired verification link.';
-                }
-            });
-        } else {
-            document.getElementById('message').textContent = 'No verification token found.';
-        }
-    </script>
+    <p class="copyright">&copy; 2026 Martekor. All rights reserved.</p>
+    <script src="js/verify.js"></script>
 </body>
 </html>
