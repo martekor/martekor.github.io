@@ -2,17 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martekor - Home</title>
-    <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'MartekorFont', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        .header {
+            background: #ffffff;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            font-size: 20px;
+            color: #7c3aed;
+        }
+        .profile {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #7c3aed;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .welcome {
+            font-size: 22px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .welcome span {
+            color: #7c3aed;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #e8e8e8;
+            margin-bottom: 12px;
+        }
+        .card h3 {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+        .card p {
+            font-size: 13px;
+            color: #888;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .bottom-nav a {
+            text-decoration: none;
+            color: #888;
+            font-size: 12px;
+            text-align: center;
+        }
+        .bottom-nav a.active {
+            color: #7c3aed;
+        }
+    </style>
 </head>
 <body>
-    <h1>Home</h1>
-    <p id="profile"></p>
-    <h2>Other users</h2>
-    <div id="userList"></div>
-    <script src="session-home.js"></script>
-    <script src="home.js"></script>
+    <div class="header">
+        <h1>martekor</h1>
+        <div class="profile">M</div>
+    </div>
+    <div class="content">
+        <p class="welcome">Welcome, <span>User</span></p>
+        <p class="subtitle">What would you like to do today?</p>
+        <div class="card">
+            <h3>Post a Task</h3>
+            <p>Find help for cleaning, moving, repairs and more.</p>
+        </div>
+        <div class="card">
+            <h3>Browse Tasks</h3>
+            <p>See available tasks near you.</p>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <a href="home.html" class="active">Home</a>
+        <a href="#">Tasks</a>
+        <a href="#">Messages</a>
+        <a href="#">Profile</a>
+    </div>
 </body>
 </html>
