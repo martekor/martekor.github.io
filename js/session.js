@@ -13,10 +13,7 @@ fetch('/config/api.json')
             .then(function(res) { return res.json(); })
             .then(function(result) {
                 if (result.status === 'valid' && result.verified === true) {
-                    document.getElementById('message').textContent = 'Welcome back, ' + result.username;
-                    setTimeout(function() {
-                        window.location.href = '/home.html';
-                    }, 2000);
+                    window.location.href = '/home.html';
                 } else if (result.status === 'valid' && result.verified === false) {
                     document.getElementById('message').textContent = 'You already registered from this device. Please check your email and click the verification link to confirm your account.';
                     document.querySelector('button').disabled = false;
